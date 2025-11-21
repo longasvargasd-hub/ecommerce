@@ -22,8 +22,16 @@ export const loginusuario = async (req, res) => {
       return res.status(401).json({ message: "contraseña incorrecta" });
     }
 
+
     // validamos el inicio de sesion
-    res.status(200).json({ message: "inicio de sesión correcto" });
+    res.status(200).json({ message: "inicio de sesión correcto",
+      usuario:{
+          nombre:usuario.nombre,
+          apellido:usuario.apellido,
+          telefono:usuario.telefono,
+          correo:usuario.correo
+        }
+    });
 
   } catch (error) {
     res.status(500).json({ message: "error al iniciar sesión", error });
