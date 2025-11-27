@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async()=>{
 
             <button id="logout-btn"
                 class="flex items-center w-full px-4 py-3 text-sm text-gray-600
-                        hover:bg-blue-100 hover:text-blue-800 
+                        hover:bg-red-100 hover:text-red-800 
                         active:bg-blue-200 transition-all duration-150 rounded-md cursor-pointer">
                 Cerrar sesión
             </button>
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", async()=>{
     document.getElementById("user-avatar").textContent = avatar;
 
     
-    // ⭐ 4. ANIMACIÓN ABRIR/CERRAR
+    //  4. ANIMACIÓN ABRIR/CERRAR
     
     document.getElementById("user-menu-btn").addEventListener("click", () => {
         const drop = document.getElementById("user-dropdown");
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", async()=>{
 
 
 
-// ⭐ 5. CERRAR SESIÓN + TOAST
+//  5. CERRAR SESIÓN + TOAST
 
 document.addEventListener("click", (e) => {
     if (e.target.id === "logout-btn") {
