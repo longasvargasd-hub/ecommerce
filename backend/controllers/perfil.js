@@ -30,51 +30,32 @@ export const obtenerPerfil = async(req,res)=>{
 
     }
 }
-// actualizar perfil del usuario 
 export const actualizarPerfil = async (req, res) => {
-    try {
-        const {correo, nombre, apellido, telefono} = req.body;
+  try {
+    const { nombre, apellido, telefono, correo } = req.body;
 
-        // validar campos obligatorios 
-        if (!correo) {
-            return res.status(400).json({ message: "email es requerido"});
-        }
+    if (!correo)
+      return res.status(400).json({ message: "correo es requerido" });
 
-        if (!nombre || !apellido || !telefono) {
-             return res.status(400).json({ message: "Todos los campos son obligatorios"});
-        }
+    const usuario = await user.findOneAndUpdate(
+      { correo },
+      { nombre, apellido, telefono },
+      { new: true, select: "-password" }
+    );
 
-        const usuarioActualizado = await user.findOneAndUpdate(
-            {correo: correo},
-            {
-                nombre: nombre,
-                apellido: apellido,
-                telefono: telefono
-            },
-            {new: true}
-            // no va seleccionar el campo passwords
-        ).select('-passwods')
+    if (!usuario)
+      return res.status(404).json({ message: "usuario no encontrado" });
 
-        if (!usuarioActualizado) {
-            return req.status(404).json({ message: "Usuario no encontrado"});
-        }
-
-        return res.status(200).json({
-            message: "Perfil actualizado exitosamente",
-            usuario: {
-                nombre:usuarioActualizado.nombre,
-                apellido:usuarioActualizado.apellido,
-                telefono:usuarioActualizado.telefono,
-                correo:usuarioActualizado.correo 
-            }
-        });
-    } catch (error) {
-        res.status(500).json({
-            message: "Error al actualizar perfil",
-            error: error.message
-        });
-    }
+    return res.status(200).json({ usuario });
+  } catch (error) {
+    console.error("Error actualizando perfil:", error);
+    res.status(500).json({
+      message: "error al actualizar perfil",
+      error: error.message,
+    });
+  }
 };
+
 
 export const eliminarPerfil = async (req,res) =>{
     try {
