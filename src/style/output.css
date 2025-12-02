@@ -524,6 +524,15 @@
   .w-60 {
     width: calc(var(--spacing) * 60);
   }
+  .w-80 {
+    width: calc(var(--spacing) * 80);
+  }
+  .w-90 {
+    width: calc(var(--spacing) * 90);
+  }
+  .w-100 {
+    width: calc(var(--spacing) * 100);
+  }
   .w-full {
     width: 100%;
   }
@@ -1616,6 +1625,11 @@
   .md\:bg-transparent {
     @media (width >= 48rem) {
       background-color: transparent;
+    }
+  }
+  .md\:px-6 {
+    @media (width >= 48rem) {
+      padding-inline: calc(var(--spacing) * 6);
     }
   }
   .md\:px-12 {
