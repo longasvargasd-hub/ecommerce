@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechStore Pro - Su tienda tecnológica online</title>
+  <link rel="stylesheet" href="../style/output.css">
+</head>
+
+<body class="bg-gray-50 font-sans">
+  <header class="bg-white shadow-lg sticky top-0 z-50">
+    <nav class="container mx-auto px-4 py-4">
+      <div class="flex justify-between items-center">
+        <!-- Logo -->
+        <div class="flex items-center">
+          <div class="bg-linear-to-r from-blue-600 to-purple-600 text-white px-3 py-2 rounded-lg mr-3">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+            </svg>
+          </div>
+          <h1 class="text-2xl font-bold bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <a href="../pages/index.html">TechStore Pro</a>
+          </h1>
+        </div>
+
+        <!-- Menú -->
+        <div class="hidden md:flex space-x-6">
+          <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group">
+            Inicio
+            <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-600"></span>
+            
+          </a>
+          <a href="../pages/productos.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group">
+            Productos
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full"></span>
+            
+          </a>
+          <a href="../pages/categorias.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group">
+            Categorías
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full"></span>
+          </a>
+          <a href="../pages/contactenos.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group">
+            Contacto
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full"></span>
+          </a>
+
+    
+          
+        </div>
+
+        <!-- Carrito -->
+        <div class="flex items-center space-x-4">
+          <a href="./car.html" class="cart-icon relative group p-2.5 hover:bg-linear-to-r hover:from-blue-50 hover:to-indigo-50 rounded-xl transition-all duration-300 transform hover:scale-105">
+            <svg class="w-6 h-6 text-gray-700 group-hover:text-blue-600 transition-all duration-300 group-hover:rotate-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5m0 0h1.1m0-5v5m0 0h10m-10 0a2 2 0 104 0m6 0a2 2 0 100 4"/>
+            </svg>
+            <span id="cart-counter" class="cart-counter-pulse absolute -top-2 -right-2 bg-linear-to-r from-red-500 via-pink-500 to-red-600 text-white text-xs font-bold rounded-full min-w-5 h-5 flex items-center justify-center px-1 shadow-lg border-2 border-white" style="display:none;">0</span>
+          </a>
+          <!-- icono de login  -->
+         <a href="login.html" class="relative group p-2.5 hover:bg-linear-to-r hover:from-blue-50 hover:to-indigo-50 rounded-xl transition-all duration-300 transform hover:scale-105">
+           <svg class="w-6 h-6 text-gray-700 group-hover:text-blue-600 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+           <path stroke-linecap="round" stroke-linejoin="round" 
+           d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+           </svg>
+        </a>
+          
+        </div>
+
+      </div>
+    </nav>
+  </header>
+   <div class="w-full pt-10 px-6 md:px-12 lg:px-20">
+
+  <!-- Breadcrumb -->
+  <div class="mb-6 flex items-center gap-1 text-sm">
+    <span class="text-blue-600 font-medium">Inicio</span>
+    <span class="text-black-600">→ Carrito de Compras</span>
+  </div>
+
+  <!-- Título principal -->
+  <h1 class="text-3xl font-semibold mt-2 flex items-center gap-2">
+    <!-- Ícono Carrito (al lado del título TU CARRITO) -->
+    <span class="icon-slot w-6 h-6">
+      <svg class= "text-blue-600"xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+</svg>
+
+    </span>
+
+    Tu Carrito
+  </h1>
+
+  <p class="text-black-600 text-sm mt-1">Revisa tus productos antes de finalizar la compra</p>
+
+  <!-- Layout principal -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mt-6">
+
+    <!-- Columna izquierda (vacía como en la imagen) -->
+    <div class="col-span-2">
+      <!-- Aquí irán los productos del carrito -->
+    </div>
+
+    <!-- Tarjeta del resumen -->
+    <div class="bg-white shadow-md rounded-xl p-6 h-fit border border-gray-100">
+
+      <!-- Título del resumen -->
+      <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+        <!-- Ícono Documento -->
+        <span class="icon-slot w-5 h-5">
+          <svg class= "text-blue-600 "xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+          </svg>
+
+        </span>
+
+        Resumen del Pedido
+      </h2>
+
+      <!-- Totales -->
+      <div class="mb-4 space-y-2">
+        <div class="flex justify-between text-sm">
+          <span>Subtotal</span>
+          <span class="font-medium">$0</span>
+        </div>
+
+        <div class="flex justify-between text-sm">
+          <span>Envío</span>
+          <span class="text-green-600 font-medium">Gratis</span>
+        </div>
+
+        <!-- Total con color -->
+        <div class="w-full mt-3 p-3 rounded-lg bg-gradient-to-r from-blue-50 to-purple-50 border border-gray-200 flex justify-between font-semibold text-lg">
+          <span>Total</span>
+          <span class="text-purple-600">$0</span>
+        </div>
+      </div>
+
+      <!-- Información de envío -->
+      <h3 class="text-sm font-medium mb-2 mt-4 flex items-center gap-2">
+        <!-- Ícono Ubicación -->
+        <span class="icon-slot w-5 h-5">
+          <svg  class= "text-blue-600 "xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+          </svg>
+
+        </span>
+        
+
+        Información de Envío
+      </h3>
+
+      <div class="space-y-3">
+        <input type="text"
+               placeholder="Ej: Calle 123 #45-67"
+               class="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm">
+
+        <div class="grid grid-cols-2 gap-3">
+          <input type="text" value="Bogotá"
+                 class="border border-gray-300 px-3 py-2 rounded-lg text-sm">
+          <input type="text" value="110111"
+                 class="border border-gray-300 px-3 py-2 rounded-lg text-sm">
+        </div>
+
+        <select class="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm">
+          <option><span class="icon-slot w-5 h-5">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" />
+            </svg>
+
+          </span>Efectivo contra entrega</option>
+        </select>
+      </div>
+
+      <!-- Botón -->
+      <button class="w-full mt-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-lg text-sm font-medium hover:opacity-95 transition flex items-center justify-center gap-2">
+
+        <!-- Ícono Check o cualquier ícono que quieras en el botón -->
+        <span class="icon-slot w-5 h-5"></span>
+
+        Finalizar Compra
+      </button>
+
+      <!-- Beneficios -->
+      <div class="text-xs text-gray-500 mt-4 space-y-1">
+
+        <p class="flex items-center gap-2">
+          <!-- Ícono Check -->
+          <span class="icon-slot w-4 h-4"></span>
+          Compra segura y protegida
+        </p>
+
+        <p class="flex items-center gap-2">
+          <!-- Ícono Check -->
+          <span class="icon-slot w-4 h-4"></span>
+          Envío gratis en compras +$100.000
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+ 
+
+</body>
+</html>
