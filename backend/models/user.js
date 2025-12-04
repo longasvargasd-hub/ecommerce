@@ -1,11 +1,16 @@
 import mongoose from "mongoose";
-const userShema =new mongoose.Schema({
-    nombre:{type:String,required:true},
-    apellido:{type:String,required:true},
-    telefono:{type:Number,required:true,minlength:12},
-    correo:{type:String,required:true},
-    password:{type:String,required:true,minlength:10}
+
+const userSchema = new mongoose.Schema({
+    nombre: { type: String, required: true },
+    apellido: { type: String, required: true },
+    telefono: { type: String, required: true }, // Cambié a String
+    correo: { type: String, required: true, unique: true },
+    password: { type: String, required: true, minlength: 6 },
+    
+    // ✅ NUEVOS CAMPOS PARA RECUPERACIÓN
+    codigoRecuperacion: { type: String },
+    codigoExpiracion: { type: Date }
 });
-// forzamos para que me guarde la informacion en la coleccion de usuario //
-const user=mongoose.model("user",userShema,"user");
+
+const user = mongoose.model("user", userSchema, "user");
 export default user;
