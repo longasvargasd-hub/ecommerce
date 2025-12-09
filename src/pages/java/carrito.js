@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log(' Página de carrito cargada correctamente');
+    console.log('✅ Página de carrito cargada correctamente');
 
     const API_URL = "https://tiendaecommer.onrender.com/api/carrito";
     
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('finalizar-compra-btn').addEventListener('click', finalizarCompra);
 });
 
-//  CARGAR CARRITO DESDE EL BACKEND 
+// ===== CARGAR CARRITO DESDE EL BACKEND =====
 async function cargarCarritoDesdeBackend() {
     try {
         const response = await fetch('https://tiendaecommer.onrender.com/api/carrito');
@@ -27,7 +27,7 @@ async function cargarCarritoDesdeBackend() {
         mostrarProductos(productos);
         
     } catch (error) {
-        console.error(' Error al cargar carrito:', error);
+        console.error('❌ Error al cargar carrito:', error);
         mostrarCarritoVacio();
     }
 }
@@ -48,7 +48,6 @@ function mostrarProductos(productos) {
     actualizarTotales(totalGeneral);
     actualizarContadorCarrito(productos.length);
 }
-
 
 function crearProductoHTML(producto) {
     return `
@@ -99,7 +98,6 @@ function crearProductoHTML(producto) {
     `;
 }
 
-
 function mostrarCarritoVacio() {
     const container = document.getElementById('cart-items-container');
     container.innerHTML = `
@@ -120,12 +118,10 @@ function mostrarCarritoVacio() {
     actualizarContadorCarrito(0);
 }
 
-
 function actualizarTotales(total) {
     document.getElementById('subtotal').textContent = `$${total.toLocaleString()}`;
     document.getElementById('total').textContent = `$${total.toLocaleString()}`;
 }
-
 
 function actualizarContadorCarrito(cantidad) {
     const contador = document.getElementById('cart-counter');
@@ -136,7 +132,6 @@ function actualizarContadorCarrito(cantidad) {
         contador.style.display = 'none';
     }
 }
-
 
 window.cambiarCantidad = async function(id, nuevaCantidad) {
     if (nuevaCantidad <= 0) {
@@ -156,18 +151,17 @@ window.cambiarCantidad = async function(id, nuevaCantidad) {
         const resultado = await response.json();
         
         if (response.ok) {
-            console.log(' Cantidad actualizada:', resultado);
-            cargarCarritoDesdeBackend(); // Recargar carrito
+            console.log('✅ Cantidad actualizada:', resultado);
+            cargarCarritoDesdeBackend();
         } else {
             alert('Error al actualizar cantidad: ' + resultado.mensaje);
         }
         
     } catch (error) {
-        console.error(' Error al actualizar cantidad:', error);
+        console.error('❌ Error al actualizar cantidad:', error);
         alert('Error de conexión. Intenta nuevamente.');
     }
 };
-
 
 window.eliminarProducto = async function(id) {
     if (!confirm('¿Estás seguro de eliminar este producto del carrito?')) {
@@ -182,23 +176,26 @@ window.eliminarProducto = async function(id) {
         const resultado = await response.json();
         
         if (response.ok) {
-            console.log(' Producto eliminado:', resultado);
-            cargarCarritoDesdeBackend(); // Recargar carrito
+            console.log('✅ Producto eliminado:', resultado);
+            cargarCarritoDesdeBackend();
         } else {
             alert('Error al eliminar producto: ' + resultado.mensaje);
         }
         
     } catch (error) {
-        console.error(' Error al eliminar producto:', error);
+        console.error('❌ Error al eliminar producto:', error);
         alert('Error de conexión. Intenta nuevamente.');
     }
 };
 
+// ⭐⭐⭐ FUNCIÓN CORREGIDA - FINALIZAR COMPRA ⭐⭐⭐
 async function finalizarCompra() {
     try {
-        // 1. Verificar que hay productos en el carrito
-        const responseCarrito = await fetch('https://tiendaecommer.onrender.com/api/carrito/finalizar/compra');
+        // 1. Obtener productos del carrito (GET simple)
+        const responseCarrito = await fetch('https://tiendaecommer.onrender.com/api/carrito');
         const productos = await responseCarrito.json();
+        
+        console.log('📦 Productos del backend:', productos);
         
         if (!productos || productos.length === 0) {
             alert('Tu carrito está vacío. Agrega productos antes de finalizar la compra.');
@@ -231,7 +228,7 @@ async function finalizarCompra() {
             return;
         }
         
-        // 4. Actualizar dirección de envío en cada producto
+        // 4. Deshabilitar botón y mostrar loading
         const btn = document.getElementById('finalizar-compra-btn');
         btn.disabled = true;
         btn.innerHTML = `
@@ -242,6 +239,7 @@ async function finalizarCompra() {
         `;
         
         // 5. Actualizar método de pago y dirección en cada producto
+        console.log('📝 Actualizando información de envío...');
         for (const producto of productos) {
             await fetch(`https://tiendaecommer.onrender.com/api/carrito/${producto._id}`, {
                 method: 'PUT',
@@ -259,28 +257,35 @@ async function finalizarCompra() {
             });
         }
         
-        // 6. Finalizar compra (cambiar estado a "procesando")
+        // 6. ⭐ FINALIZAR COMPRA - POST (Esta es la llamada correcta)
+        console.log('🚀 Finalizando compra...');
         const response = await fetch('https://tiendaecommer.onrender.com/api/carrito/finalizar/compra', {
-            method: 'POST'
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
         
         const resultado = await response.json();
         
+        console.log('📊 Respuesta del servidor:', resultado);
+        
         if (response.ok) {
             // 7. Mostrar confirmación
             const total = resultado.total;
-            alert(`🎉 ¡Compra finalizada exitosamente!\n\nTotal: $${total.toLocaleString()}\nMétodo de pago: ${metodoPagoTexto}\nDirección: ${direccion}, ${ciudad}\n\n¡Gracias por tu compra!`);
+            const pedidoId = resultado.pedidoId;
             
-            // 8. Vaciar carrito
-            await fetch('https://tiendaecommer.onrender.com/api/carrito/vaciar/todo', {
-                method: 'DELETE'
-            });
+            alert(`🎉 ¡Compra finalizada exitosamente!\n\n✅ Pedido #${pedidoId}\n💰 Total: $${total.toLocaleString()}\n💳 Método de pago: ${metodoPagoTexto}\n📍 Dirección: ${direccion}, ${ciudad}\n\n¡Gracias por tu compra!`);
             
-            // 9. Recargar página para mostrar carrito vacío
-            window.location.reload();
+            console.log('✅ Pedido guardado en MongoDB:', pedidoId);
+            
+            // 8. Recargar página para mostrar carrito vacío
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
             
         } else {
-            alert('Error al finalizar la compra: ' + resultado.mensaje);
+            alert('❌ Error al finalizar la compra: ' + resultado.mensaje);
             btn.disabled = false;
             btn.innerHTML = `
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
@@ -291,7 +296,7 @@ async function finalizarCompra() {
         }
         
     } catch (error) {
-        console.error('Error al finalizar compra:', error);
+        console.error('❌ Error al finalizar compra:', error);
         alert('Error de conexión con el servidor. Intenta nuevamente.');
         
         const btn = document.getElementById('finalizar-compra-btn');

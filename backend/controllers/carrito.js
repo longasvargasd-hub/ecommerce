@@ -1,5 +1,5 @@
 import Carrito from '../models/carrito.js';
-import Pedido from '../models/pedido.js'; // ⭐ LÍNEA NUEVA - Importar modelo de Pedido
+import Pedido from '../models/pedido.js';
 
 // Obtener todos los items del carrito
 export const obtenerCarrito = async (req, res) => {
@@ -68,7 +68,7 @@ export const actualizarCantidad = async (req, res) => {
     item.cantidad = cantidad;
     item.total = item.precio * cantidad;
     
-    // ⭐ ACTUALIZAR método de pago y dirección si se proporcionan
+    // Actualizar método de pago y dirección si se proporcionan
     if (metodoPago) item.metodoPago = metodoPago;
     if (direccionEnvio) item.direccionEnvio = direccionEnvio;
     
@@ -122,12 +122,15 @@ export const obtenerTotal = async (req, res) => {
   }
 };
 
-// ⭐⭐⭐ FUNCIÓN COMPLETAMENTE MODIFICADA ⭐⭐⭐
-// Finalizar compra (GUARDA EN LA COLECCIÓN "pedidos" Y VACÍA EL CARRITO)
+// ⭐⭐⭐ FINALIZAR COMPRA - GUARDA EN MONGODB Y VACÍA CARRITO ⭐⭐⭐
 export const finalizarCompra = async (req, res) => {
   try {
+    console.log('🚀 Iniciando proceso de finalizar compra...');
+    
     // 1. Obtener todos los items del carrito
     const items = await Carrito.find();
+    
+    console.log(`📦 Items en el carrito: ${items.length}`);
     
     if (items.length === 0) {
       return res.status(400).json({ mensaje: 'El carrito está vacío' });

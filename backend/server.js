@@ -10,9 +10,18 @@ import registroRoutes from "./routes/registro.js";
 import RecuperarPassword from './routes/recuperar.js';
 import carritoRoutes from './routes/carrito.js';
 
+dotenv.config();
+
 const app = express();
+
+
+app.use(cors({
+  origin: ['https://ecommertiendia.netlify.app', 'http://localhost:5173', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
+
 app.use(express.json());
-app.use(cors());
 
 app.get('/',(req,res)=>{
     res.send('bienvenido al curso de node');
@@ -26,4 +35,6 @@ app.use("/api/registro", registroRoutes);
 app.use('/api/Recuperar', RecuperarPassword);
 app.use('/api/carrito', carritoRoutes); 
 
-app.listen(8081, ()=> console.log('servidor corriendo en https://tiendaecommer.onrender.com'));
+const PORT = process.env.PORT || 8081;
+
+app.listen(PORT, ()=> console.log(`servidor corriendo en https://tiendaecommer.onrender.com`));
