@@ -1,4 +1,5 @@
 import Carrito from '../models/carrito.js';
+import Pedido from '../models/pedido.js'; // ⭐ LÍNEA NUEVA - Importar modelo de Pedido
 
 // Obtener todos los items del carrito
 export const obtenerCarrito = async (req, res) => {
@@ -56,7 +57,7 @@ export const agregarAlCarrito = async (req, res) => {
 export const actualizarCantidad = async (req, res) => {
   try {
     const { id } = req.params;
-    const { cantidad } = req.body;
+    const { cantidad, metodoPago, direccionEnvio } = req.body;
     
     const item = await Carrito.findById(id);
     
@@ -66,6 +67,11 @@ export const actualizarCantidad = async (req, res) => {
     
     item.cantidad = cantidad;
     item.total = item.precio * cantidad;
+    
+    // ⭐ ACTUALIZAR método de pago y dirección si se proporcionan
+    if (metodoPago) item.metodoPago = metodoPago;
+    if (direccionEnvio) item.direccionEnvio = direccionEnvio;
+    
     await item.save();
     
     res.status(200).json({ mensaje: 'Cantidad actualizada', item });
@@ -116,26 +122,73 @@ export const obtenerTotal = async (req, res) => {
   }
 };
 
-// Finalizar compra (cambiar estado a procesando)
+// ⭐⭐⭐ FUNCIÓN COMPLETAMENTE MODIFICADA ⭐⭐⭐
+// Finalizar compra (GUARDA EN LA COLECCIÓN "pedidos" Y VACÍA EL CARRITO)
 export const finalizarCompra = async (req, res) => {
   try {
+    // 1. Obtener todos los items del carrito
     const items = await Carrito.find();
     
     if (items.length === 0) {
       return res.status(400).json({ mensaje: 'El carrito está vacío' });
     }
     
-    // Actualizar estado de todos los items a procesando
-    await Carrito.updateMany({}, { estado: 'procesando' });
-    
+    // 2. Calcular total
     const total = items.reduce((sum, item) => sum + item.total, 0);
     
+    // 3. Preparar productos para el pedido
+    const productos = items.map(item => ({
+      productoId: item.productoId,
+      nombre: item.nombre,
+      precio: item.precio,
+      cantidad: item.cantidad,
+      imagen: item.imagen || '',
+      total: item.total
+    }));
+    
+    // 4. Obtener método de pago y dirección del primer item
+    const primerItem = items[0];
+    const metodoPago = primerItem.metodoPago || 'Efectivo contra entrega';
+    const direccionEnvio = primerItem.direccionEnvio || {
+      calle: '',
+      ciudad: '',
+      codigoPostal: '',
+      pais: 'Colombia'
+    };
+    
+    // 5. ⭐ CREAR EL PEDIDO EN LA COLECCIÓN "pedidos"
+    const nuevoPedido = new Pedido({
+      productos: productos,
+      direccionEnvio: direccionEnvio,
+      metodoPago: metodoPago,
+      total: total,
+      estado: 'procesando',
+      fechaPedido: new Date()
+    });
+    
+    // 6. Guardar el pedido en la base de datos
+    await nuevoPedido.save();
+    
+    console.log('✅ Pedido guardado en la base de datos:', nuevoPedido._id);
+    
+    // 7. Vaciar el carrito después de guardar el pedido
+    await Carrito.deleteMany({});
+    
+    console.log('✅ Carrito vaciado exitosamente');
+    
+    // 8. Responder con éxito
     res.status(200).json({ 
       mensaje: 'Compra procesada exitosamente', 
-      total,
-      items 
+      total: total,
+      pedidoId: nuevoPedido._id,
+      pedido: nuevoPedido
     });
+    
   } catch (error) {
-    res.status(500).json({ mensaje: 'Error al finalizar compra', error: error.message });
+    console.error('❌ Error al finalizar compra:', error);
+    res.status(500).json({ 
+      mensaje: 'Error al finalizar compra', 
+      error: error.message 
+    });
   }
 };

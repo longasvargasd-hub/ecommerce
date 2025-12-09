@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Página de carrito cargada correctamente');
+    console.log(' Página de carrito cargada correctamente');
 
     const API_URL = "https://tiendaecommer.onrender.com/api/carrito";
     
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('finalizar-compra-btn').addEventListener('click', finalizarCompra);
 });
 
-// ===== CARGAR CARRITO DESDE EL BACKEND =====
+//  CARGAR CARRITO DESDE EL BACKEND 
 async function cargarCarritoDesdeBackend() {
     try {
         const response = await fetch('https://tiendaecommer.onrender.com/api/carrito');
@@ -27,7 +27,7 @@ async function cargarCarritoDesdeBackend() {
         mostrarProductos(productos);
         
     } catch (error) {
-        console.error('❌ Error al cargar carrito:', error);
+        console.error(' Error al cargar carrito:', error);
         mostrarCarritoVacio();
     }
 }
@@ -49,7 +49,7 @@ function mostrarProductos(productos) {
     actualizarContadorCarrito(productos.length);
 }
 
-// ===== CREAR HTML DE PRODUCTO =====
+
 function crearProductoHTML(producto) {
     return `
         <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 flex items-center gap-4 hover:shadow-md transition-shadow">
@@ -99,7 +99,7 @@ function crearProductoHTML(producto) {
     `;
 }
 
-// ===== MOSTRAR CARRITO VACÍO =====
+
 function mostrarCarritoVacio() {
     const container = document.getElementById('cart-items-container');
     container.innerHTML = `
@@ -120,13 +120,13 @@ function mostrarCarritoVacio() {
     actualizarContadorCarrito(0);
 }
 
-// ===== ACTUALIZAR TOTALES =====
+
 function actualizarTotales(total) {
     document.getElementById('subtotal').textContent = `$${total.toLocaleString()}`;
     document.getElementById('total').textContent = `$${total.toLocaleString()}`;
 }
 
-// ===== ACTUALIZAR CONTADOR DEL CARRITO =====
+
 function actualizarContadorCarrito(cantidad) {
     const contador = document.getElementById('cart-counter');
     if (cantidad > 0) {
@@ -137,7 +137,7 @@ function actualizarContadorCarrito(cantidad) {
     }
 }
 
-// ===== CAMBIAR CANTIDAD (ACTUALIZAR EN BACKEND) =====
+
 window.cambiarCantidad = async function(id, nuevaCantidad) {
     if (nuevaCantidad <= 0) {
         eliminarProducto(id);
@@ -156,19 +156,19 @@ window.cambiarCantidad = async function(id, nuevaCantidad) {
         const resultado = await response.json();
         
         if (response.ok) {
-            console.log('✅ Cantidad actualizada:', resultado);
+            console.log(' Cantidad actualizada:', resultado);
             cargarCarritoDesdeBackend(); // Recargar carrito
         } else {
             alert('Error al actualizar cantidad: ' + resultado.mensaje);
         }
         
     } catch (error) {
-        console.error('❌ Error al actualizar cantidad:', error);
+        console.error(' Error al actualizar cantidad:', error);
         alert('Error de conexión. Intenta nuevamente.');
     }
 };
 
-// ===== ELIMINAR PRODUCTO DEL BACKEND =====
+
 window.eliminarProducto = async function(id) {
     if (!confirm('¿Estás seguro de eliminar este producto del carrito?')) {
         return;
@@ -182,23 +182,22 @@ window.eliminarProducto = async function(id) {
         const resultado = await response.json();
         
         if (response.ok) {
-            console.log('✅ Producto eliminado:', resultado);
+            console.log(' Producto eliminado:', resultado);
             cargarCarritoDesdeBackend(); // Recargar carrito
         } else {
             alert('Error al eliminar producto: ' + resultado.mensaje);
         }
         
     } catch (error) {
-        console.error('❌ Error al eliminar producto:', error);
+        console.error(' Error al eliminar producto:', error);
         alert('Error de conexión. Intenta nuevamente.');
     }
 };
 
-// ===== FINALIZAR COMPRA =====
 async function finalizarCompra() {
     try {
         // 1. Verificar que hay productos en el carrito
-        const responseCarrito = await fetch('https://tiendaecommer.onrender.com/api/carrito');
+        const responseCarrito = await fetch('https://tiendaecommer.onrender.com/api/carrito/finalizar/compra');
         const productos = await responseCarrito.json();
         
         if (!productos || productos.length === 0) {
@@ -292,7 +291,7 @@ async function finalizarCompra() {
         }
         
     } catch (error) {
-        console.error('❌ Error al finalizar compra:', error);
+        console.error('Error al finalizar compra:', error);
         alert('Error de conexión con el servidor. Intenta nuevamente.');
         
         const btn = document.getElementById('finalizar-compra-btn');
