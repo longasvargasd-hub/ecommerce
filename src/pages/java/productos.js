@@ -1,7 +1,7 @@
 // Función de cargar productos 
 async function cargarproducto(){
     try{
-        const response = await fetch('http://localhost:8081/api/productos');
+        const response = await fetch('https://tiendaecommer.onrender.com/api/productos');
         const productos = await response.json();
         const grid = document.getElementById('products-grid');
         
@@ -95,7 +95,7 @@ async function agregarAlCarrito(productoId, nombre, precio, imagen) {
         console.log('📦 Enviando al carrito:', data);
         
         // Enviar al backend
-        const response = await fetch('http://localhost:8081/api/carrito', {
+        const response = await fetch('https://tiendaecommer.onrender.com/api/carrito', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -151,7 +151,7 @@ async function agregarAlCarrito(productoId, nombre, precio, imagen) {
 // ===== ACTUALIZAR CONTADOR DEL CARRITO =====
 async function actualizarContadorCarrito() {
     try {
-        const response = await fetch('http://localhost:8081/api/carrito');
+        const response = await fetch('https://tiendaecommer.onrender.com/api/carrito');
         const productos = await response.json();
         
         const contador = document.getElementById('cart-counter');

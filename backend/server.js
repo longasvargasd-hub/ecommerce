@@ -26,4 +26,4 @@ app.use("/api/registro", registroRoutes);
 app.use('/api/Recuperar', RecuperarPassword);
 app.use('/api/carrito', carritoRoutes); 
 
-app.listen(8081, ()=> console.log('servidor corriendo en http://localhost:8081'));
+app.listen(8081, ()=> console.log('servidor corriendo en https://tiendaecommer.onrender.com'));

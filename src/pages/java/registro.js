@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("✅ Página de registro cargada correctamente - sistema listo");
 
-    const API_URL = "http://localhost:8081/api/registro";
+    const API_URL = "https://tiendaecommer.onrender.com/api/registro";
 
     // Manejar envío del formulario
     document.getElementById("register-form").addEventListener("submit", async (e) => {

@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const correo = inpEmail.value.trim();
     
         try {
-            const res = await fetch("http://localhost:8081/api/perfil/actualizar", {
+            const res = await fetch("https://tiendaecommer.onrender.com/api/perfil/actualizar", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ nombre, apellido, telefono, correo }),

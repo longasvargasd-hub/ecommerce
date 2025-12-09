@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('✅ Página de código cargada correctamente');
 
-    const API_URL = "http://localhost:8081/api/Recuperar/cambiar-password";
+    const API_URL = "https://tiendaecommer.onrender.com/api/Recuperar/cambiar-password";
 
     // Obtener y mostrar el correo guardado
     const correoGuardado = localStorage.getItem('correo');

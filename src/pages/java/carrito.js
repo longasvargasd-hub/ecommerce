@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ Página de carrito cargada correctamente');
 
-    const API_URL = "http://localhost:8081/api/carrito";
+    const API_URL = "https://tiendaecommer.onrender.com/api/carrito";
     
     // Cargar productos del carrito desde el BACKEND
     cargarCarritoDesdeBackend();
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ===== CARGAR CARRITO DESDE EL BACKEND =====
 async function cargarCarritoDesdeBackend() {
     try {
-        const response = await fetch('http://localhost:8081/api/carrito');
+        const response = await fetch('https://tiendaecommer.onrender.com/api/carrito');
         const productos = await response.json();
         
         console.log('📦 Productos del backend:', productos);
@@ -145,7 +145,7 @@ window.cambiarCantidad = async function(id, nuevaCantidad) {
     }
     
     try {
-        const response = await fetch(`http://localhost:8081/api/carrito/${id}`, {
+        const response = await fetch(`https://tiendaecommer.onrender.com/api/carrito/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -175,7 +175,7 @@ window.eliminarProducto = async function(id) {
     }
     
     try {
-        const response = await fetch(`http://localhost:8081/api/carrito/${id}`, {
+        const response = await fetch(`https://tiendaecommer.onrender.com/api/carrito/${id}`, {
             method: 'DELETE'
         });
         
@@ -198,7 +198,7 @@ window.eliminarProducto = async function(id) {
 async function finalizarCompra() {
     try {
         // 1. Verificar que hay productos en el carrito
-        const responseCarrito = await fetch('http://localhost:8081/api/carrito');
+        const responseCarrito = await fetch('https://tiendaecommer.onrender.com/api/carrito');
         const productos = await responseCarrito.json();
         
         if (!productos || productos.length === 0) {
@@ -244,7 +244,7 @@ async function finalizarCompra() {
         
         // 5. Actualizar método de pago y dirección en cada producto
         for (const producto of productos) {
-            await fetch(`http://localhost:8081/api/carrito/${producto._id}`, {
+            await fetch(`https://tiendaecommer.onrender.com/api/carrito/${producto._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -261,7 +261,7 @@ async function finalizarCompra() {
         }
         
         // 6. Finalizar compra (cambiar estado a "procesando")
-        const response = await fetch('http://localhost:8081/api/carrito/finalizar/compra', {
+        const response = await fetch('https://tiendaecommer.onrender.com/api/carrito/finalizar/compra', {
             method: 'POST'
         });
         
@@ -273,7 +273,7 @@ async function finalizarCompra() {
             alert(`🎉 ¡Compra finalizada exitosamente!\n\nTotal: $${total.toLocaleString()}\nMétodo de pago: ${metodoPagoTexto}\nDirección: ${direccion}, ${ciudad}\n\n¡Gracias por tu compra!`);
             
             // 8. Vaciar carrito
-            await fetch('http://localhost:8081/api/carrito/vaciar/todo', {
+            await fetch('https://tiendaecommer.onrender.com/api/carrito/vaciar/todo', {
                 method: 'DELETE'
             });
             

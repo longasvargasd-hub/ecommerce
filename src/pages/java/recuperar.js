@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('✅pagina cargada correcta - sistema listo');
 
-    const API_URL = "http://localhost:8081/api/Recuperar/solicitar-codigo"
+    const API_URL = "https://tiendaecommer.onrender.com/api/Recuperar/solicitar-codigo"
 
     document.getElementById('recuperar-form').addEventListener('submit', async (e) => {
         e.preventDefault();
