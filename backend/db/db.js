@@ -1,9 +1,13 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const uri = process.env.MONGODB_URI;
+
+console.log("URI:", uri);
+
+if (!uri) {
+  throw new Error("MONGODB_URI no está definida");
+}
+
 mongoose.connect(uri)
-.then(()=> console.log("✅ conectado a la base de datos"))
-.catch(err => console.log ("❌error al conectar la base de datos", err));
+  .then(() => console.log("✅ Conectado a la base de datos"))
+  .catch(err => console.error("❌ Error MongoDB:", err));

@@ -6,6 +6,6 @@ const productShema =new mongoose.Schema({
     Precio:{type:Number,required:true},
     Image:{type:String,required:true},
 });
-// forzamos para que me guarde la informacion en la coleccion de producto //
+
 const product=mongoose.model("productos",productShema,"productos");
 export default product;

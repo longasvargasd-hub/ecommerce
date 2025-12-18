@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Cambiar password a texto al dar clic en el ojo
             passwordInput.type = isHidden ? 'text' : 'password';
 
-            // Alternar íconos según el estado
             eyeOpen.classList.toggle('hidden', !isHidden);
             eyeClosed.classList.toggle('hidden', isHidden);
         });

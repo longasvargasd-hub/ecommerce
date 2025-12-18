@@ -5,6 +5,6 @@ const router = express.Router()
 //
 router.post("/", createproductos);
 
-//obtener productos
+
 router.get("/", obtenerproductos);
 export default router

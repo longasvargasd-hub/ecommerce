@@ -1,5 +1,3 @@
-// conectar backend con el front
-// verificar que toda la pagina este conectada con los elementos html
 
 document.addEventListener('DOMContentLoaded', function () {
     console.log('✅ página cargada correctamente - sistema listo');
@@ -57,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     apellido: resultado.usuario.apellido || '',
                     telefono: resultado.usuario.telefono || '',
                     correo: resultado.usuario.correo || ''
-                    // no guardar password aquí
+                   
                 };
                 localStorage.setItem("sesionActiva", "true");
                 localStorage.setItem("usuario", JSON.stringify(usuarioParaAlmacenar));

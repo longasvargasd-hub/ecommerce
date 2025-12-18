@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('recuperar-form').addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        //preparamos los elementos de la pagina
+    
         const btn = document.getElementById('recuperar-btn');
         const errorDiv=document.getElementById('recuperar-error');
         const  errorMsg=document.getElementById('recuperar-error-message');

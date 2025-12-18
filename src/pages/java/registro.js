@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("register-form").addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        // Preparar elementos de la página
         const btn = document.getElementById("register-submit");
         const errorDiv = document.getElementById("register-error");
         const errorMsg = document.getElementById("register-error-message");

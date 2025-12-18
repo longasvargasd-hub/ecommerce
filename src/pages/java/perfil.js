@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("perfil-lastName").value = usuario.apellido;
     document.getElementById("perfil-email").value = usuario.correo;
     document.getElementById("perfil-tel").value = usuario.telefono || "";
-    /*************** EDICIÓN DEL PERFIL ***************/
+   
     const btnEditar = document.getElementById("editar-perfil");
     const btnGuardar = document.getElementById("guardar-cambios");
     const btnCancelar = document.getElementById("cancelar-cambios");

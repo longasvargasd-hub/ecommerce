@@ -1,5 +1,5 @@
 import Carrito from '../models/carrito.js';
-import Pedido from '../models/pedido.js'; // ⭐ LÍNEA NUEVA - Importar modelo de Pedido
+import Pedido from '../models/pedido.js'; 
 
 // Obtener todos los items del carrito
 export const obtenerCarrito = async (req, res) => {
@@ -34,7 +34,7 @@ export const agregarAlCarrito = async (req, res) => {
       });
     }
     
-    // Si no existe, crear nuevo item
+    // Si no existe, crear nuevo 
     const nuevoItem = new Carrito({
       productoId,
       nombre,
@@ -53,7 +53,7 @@ export const agregarAlCarrito = async (req, res) => {
   }
 };
 
-// Actualizar cantidad de un item
+// Actualizar cantidad 
 export const actualizarCantidad = async (req, res) => {
   try {
     const { id } = req.params;
@@ -68,7 +68,7 @@ export const actualizarCantidad = async (req, res) => {
     item.cantidad = cantidad;
     item.total = item.precio * cantidad;
     
-    // ⭐ ACTUALIZAR método de pago y dirección si se proporcionan
+    //  ACTUALIZAR método de pago y dirección si se proporcionan
     if (metodoPago) item.metodoPago = metodoPago;
     if (direccionEnvio) item.direccionEnvio = direccionEnvio;
     
@@ -122,7 +122,7 @@ export const obtenerTotal = async (req, res) => {
   }
 };
 
-// ⭐⭐⭐ FUNCIÓN COMPLETAMENTE MODIFICADA ⭐⭐⭐
+
 // Finalizar compra (GUARDA EN LA COLECCIÓN "pedidos" Y VACÍA EL CARRITO)
 export const finalizarCompra = async (req, res) => {
   try {
@@ -156,7 +156,7 @@ export const finalizarCompra = async (req, res) => {
       pais: 'Colombia'
     };
     
-    // 5. ⭐ CREAR EL PEDIDO EN LA COLECCIÓN "pedidos"
+    // 5.  CREAR EL PEDIDO EN LA COLECCIÓN "pedidos"
     const nuevoPedido = new Pedido({
       productos: productos,
       direccionEnvio: direccionEnvio,

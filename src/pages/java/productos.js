@@ -1,4 +1,3 @@
-// Función de cargar productos 
 async function cargarproducto(){
     try{
         const response = await fetch('https://tiendaecommer.onrender.com/api/productos');
@@ -63,10 +62,9 @@ async function cargarproducto(){
     }
 }
 
-// ===== FUNCIÓN PARA AGREGAR AL CARRITO (BACKEND) =====
 async function agregarAlCarrito(productoId, nombre, precio, imagen) {
     try {
-        // Mostrar feedback visual
+        
         const btn = event.target;
         const textoOriginal = btn.innerHTML;
         btn.disabled = true;
@@ -148,7 +146,6 @@ async function agregarAlCarrito(productoId, nombre, precio, imagen) {
     }
 }
 
-// ===== ACTUALIZAR CONTADOR DEL CARRITO =====
 async function actualizarContadorCarrito() {
     try {
         const response = await fetch('https://tiendaecommer.onrender.com/api/carrito');
@@ -174,7 +171,6 @@ async function actualizarContadorCarrito() {
     }
 }
 
-// ===== MOSTRAR NOTIFICACIÓN =====
 function mostrarNotificacion(mensaje, tipo = 'success') {
     // Crear elemento de notificación
     const notificacion = document.createElement('div');
@@ -208,14 +204,10 @@ function mostrarNotificacion(mensaje, tipo = 'success') {
     }, 3000);
 }
 
-// ===== CARGAR PRODUCTOS AL INICIAR =====
 cargarproducto();
 
-// ===== ACTUALIZAR CONTADOR AL CARGAR LA PÁGINA =====
 actualizarContadorCarrito();
 
-// ===== RECARGAR PRODUCTOS PERIÓDICAMENTE =====
-// NOTA: 500ms es muy frecuente, mejor usa 5000ms (5 segundos) o elimina esto
 setInterval(() => {
     cargarproducto();
 }, 5000); // 5 segundos

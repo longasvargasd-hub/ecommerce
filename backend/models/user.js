@@ -3,11 +3,15 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
     nombre: { type: String, required: true },
     apellido: { type: String, required: true },
-    telefono: { type: String, required: true }, // Cambié a String
-    correo: { type: String, required: true, unique: true },
+    telefono: { type: String, required: true },
+    correo: { 
+        type: String, 
+        required: true, 
+        unique: true, 
+        lowercase: true, 
+        trim: true       
+    },
     password: { type: String, required: true, minlength: 6 },
-    
-    // ✅ NUEVOS CAMPOS PARA RECUPERACIÓN
     codigoRecuperacion: { type: String },
     codigoExpiracion: { type: Date }
 });

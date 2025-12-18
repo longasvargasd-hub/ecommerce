@@ -1,4 +1,3 @@
-//importamos el modelo de la base de datos
 import user from "../models/user.js"
 
 //obtener el perfil del usuario de la bd
